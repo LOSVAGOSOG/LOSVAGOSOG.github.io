@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso de Língua Russa » Vem a Mim Lingua Russa 2024</title>
+<style>
+body {
+ font-family: Arial, sans-serif;
+ margin: 0;
+ padding: 0;
+ background-size: cover;
+ background-position: top;
+ background-repeat: no-repeat;
+ min-height: 100vh;
+ box-sizing: border-box;
+}
+
+/* IMAGEM PARA PC */
+body{
+ background-image: url('https://i.ibb.co/ky0txcm/2024-11-05-11-58-31-973-0300.webp');}
+
+/* IMAGEM PARA CELULAR */
+@media (max-width: 1280px){
+body{
+ background-image: url('https://i.ibb.co/SBsyNZN/2024-11-05-11-58-06-639-0300.webp');}
+}
+
+/* Clarear o fundo do site */
+.overlay {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background-color: rgba(255, 255, 255, 0.7);
+ z-index: 999;
+ display: none;
+}
+
+/* Estilo do pop-up */
+.popup {
+ position: fixed;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ background-color: white;
+ width: 90%; /* Responsivo */
+ max-width: 400px; /* Tamanho máximo */
+ padding: 20px;
+ box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+ z-index: 1000;
+ border-radius: 10px;
+ text-align: center;
+ display: none;
+}
+
+/* Ícone de fechar */
+.popup .close-btn {
+ position: absolute;
+ top: 10px;
+ right: 15px;
+ font-size: 16px;
+ font-weight: bold;
+ cursor: default; /* Não deixa fechar */
+}
+
+/* Estilo dos botões */
+.btn {
+ padding: 10px 15px;
+ margin: 10px 5px 0 5px;
+ border: none;
+ cursor: pointer;
+ flex: 1; /* Para que os botões cresçam igual */
+}
+
+.btn-preferencias {
+ background-color: lightgray;
+}
+
+.btn-aceito {
+ background-color: green;
+ color: white;
+}
+
+/* Container para os botões */
+.button-container {
+ display: flex; /* Flexbox para alinhar os botões */
+ justify-content: center; /* Centraliza os botões */
+        }
+
+/* Link do pop-up */
+.popup a {
+ position: absolute;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ display: block;
+ text-decoration: none;
+ color: inherit;
+}
+
+/* Responsividade */
+@media (max-width: 768px){
+.popup {
+ width: 85%; /* Largura para telas pequenas */
+ padding: 15px; /* Ajuste do padding */
+ margin-top: 50%;
+}
+
+.btn {
+ border-radius: 3px;
+ padding: 10px; /* Botões menores */
+}}
+</style>
+</head>
+<body>
+<div class="overlay"></div>
+
+<div class="popup">
+ <span class="close-btn">X</span>
+ <h2>POLÍTICA DE COOKIES</h2>
+ <p>Este site utiliza cookies para garantir que você tenha a melhor experiência em nosso site. Ao continuar navegando, você concorda com o uso de cookies.</p>
+  <div class="button-container">
+   <button class="btn btn-preferencias">Preferências</button>
+   <button class="btn btn-aceito">Aceito</button>
+   </div>
+</div>
+
+<script>
+ function showPopup() {
+  const overlay = document.querySelector('.overlay');
+  const popup = document.querySelector('.popup');
+        
+    overlay.style.display = 'block';
+    popup.style.display = 'block';
+ }
+
+ function setPopupRedirect(link) {
+  const popup = document.querySelector('.popup');
+        
+  popup.addEventListener('click', function() {window.location.href = link;});
+ }
+
+    window.onload = function() {
+        setTimeout(showPopup, 1000);
+        setPopupRedirect("https://go.hotmart.com/K96409904W");
+    };
+</script>
+</body>
+</html>
