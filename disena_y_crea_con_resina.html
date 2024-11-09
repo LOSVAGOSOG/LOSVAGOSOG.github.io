@@ -5,8 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RESINA PARA EMPRENDER | REISNA CON YULI</title>
 <style>
+/* IMAGEM PARA PC */
 body {
- font-family: Arial, sans-serif;
+ background-image: url('https://i.ibb.co/ScKB2ZY/1730996314852.png');
+}
+
+/* IMAGEM PARA CELULAR */
+@media (max-width: 768px) {
+ body {
+  background-image: url('https://i.ibb.co/mCGbjyr/1730995514046.png');
+ }
+}
+
+body {
+ font-family: Roboto, sans-serif;
  margin: 0;
  padding: 0;
  background-size: cover;
@@ -16,137 +28,177 @@ body {
  box-sizing: border-box;
 }
 
-/* IMAGEM PARA PC */
-body{
- background-image: url('https://i.ibb.co/ScKB2ZY/1730996314852.png');}
-
-/* IMAGEM PARA CELULAR */
-@media (max-width: 1024px){
-body{
- background-image: url('https://i.ibb.co/mCGbjyr/1730995514046.png');}
-}
-
-/* Clarear o fundo do site */
+/* Estilos da tela de escurecimento */
 .overlay {
  position: fixed;
  top: 0;
  left: 0;
  width: 100%;
  height: 100%;
- background-color: rgba(255, 255, 255, 0.7);
- z-index: 999;
- display: none;
+ background-color: rgba(0, 0, 0, 0.482);
+ z-index: 10;
+ display: none; /* Oculto por padrão */
 }
 
-/* Estilo do pop-up */
+/* Estilos do popup */
 .popup {
  position: fixed;
  top: 50%;
  left: 50%;
  transform: translate(-50%, -50%);
- background-color: white;
- width: 90%; /* Responsivo */
- max-width: 400px; /* Tamanho máximo */
- padding: 20px;
- box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
- z-index: 1000;
- border-radius: 10px;
+ background-color: #d3d3d3;
+ padding: 3%;
+ border-radius: 8px;
  text-align: center;
- display: none;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ z-index: 20;
+ max-width: 400px;
+ width: 40%;
+ display: none; /* Oculto por padrão */
+ font-family: Roboto, sans-serif;
+ border: solid 3px #fff;
 }
 
-/* Ícone de fechar */
-.popup .close-btn {
+/* Ajuste para telas grandes (desktop) */
+@media (min-width: 1020px) {
+ .popup {
+  max-width: 700px;
+  width: auto;
+  height: auto;
+  display: block; /* Popup aparece automaticamente para desktop */
+ }
+ .overlay {
+  display: block; /* Overlay também aparece automaticamente */
+ }
+}
+
+.popup h2 {
+ font-size: 32px;
+ color: #333;
+ font-weight: bold;
+ text-align: center;
+}
+
+.popup p {
+ font-size: 28px;
+ color: #444;
+ padding: 4%;
+ margin-bottom: 20px;
+ line-height: 1.5;
+ text-align: justify;
+}
+
+.popup a {
+ color: #007bff;
+ text-decoration: none;
+}
+
+.popup a:hover {
+ text-decoration: underline;
+}
+
+/* Estilos do botão */
+.button-container {
+ display: flex;
+ justify-content: flex-end;
+ margin-top: 20px;
+}
+
+.popup .button {
+ background-color: #007bff;
+ color: #fff;
+ border: none;
+ padding: 10px 20px;
+ border-radius: 5px;
+ cursor: pointer;
+ transition: background-color 0.3s ease;
+ font-size: 16px;
+}
+
+.popup .button:hover {
+ background-color: #0056b3;
+}
+
+.close {
+ cursor: pointer;
+ color: #007bff;
+ font-size: 20px;
  position: absolute;
  top: 10px;
- right: 15px;
- font-size: 16px;
- font-weight: bold;
- cursor: default; /* Não deixa fechar */
+ right: 10px;
 }
 
-/* Estilo dos botões */
-.btn {
- padding: 10px 15px;
- margin: 10px 5px 0 5px;
- border: none;
- cursor: pointer;
- flex: 1; /* Para que os botões cresçam igual */
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+ .popup {
+  margin-top: 20%;
+  width: 70%;
+  padding: 6%;
+ }
+ .popup h2 {
+  font-size: 26px;
+ }
+ .popup p {
+  font-size: 16px;
+  padding: 4%;
+ }
 }
-
-.btn-preferencias {
- background-color: lightgray;
-}
-
-.btn-aceito {
- background-color: green;
- color: white;
-}
-
-/* Container para os botões */
-.button-container {
- display: flex; /* Flexbox para alinhar os botões */
- justify-content: center; /* Centraliza os botões */
-        }
-
-/* Link do pop-up */
-.popup a {
- position: absolute;
- top: 0;
- left: 0;
- right: 0;
- bottom: 0;
- display: block;
- text-decoration: none;
- color: inherit;
-}
-
-/* Responsividade */
-@media (max-width: 768px){
-.popup {
- width: 85%; /* Largura para telas pequenas */
- padding: 15px; /* Ajuste do padding */
- margin-top: 50%;
-}
-
-.btn {
- border-radius: 3px;
- padding: 10px; /* Botões menores */
-}}
 </style>
 </head>
 <body>
-<div class="overlay"></div>
+  <!-- Tela principal com escurecimento -->
+  <div class="overlay"></div>
 
-<div class="popup">
- <span class="close-btn">X</span>
- <h2>Utilizamos cookies</h2>
- <p>Este sitio web utiliza cookies propias y de terceros para mantener la sesión, ofrecerle una mejor experiencia de usuario y obtener datos estadísticos de navegación de los usuarios.</p>
-  <div class="button-container">
-   <button class="btn btn-preferencias">Gestión de cookies</button>
-   <button class="btn btn-aceito">Aceptar todas</button>
-   </div>
-</div>
+  <!-- Janela de popup -->
+  <div class="popup">
+    <span class="close">Cerrar</span>
+    <h2>Política de Cookies</h2>
+    <p>
+      Este sitio utiliza cookies para personalizar contenido y anuncios,
+      proporcionar funciones de redes sociales y analizar nuestro tráfico.
+      Al hacer clic en Aceptar, usted acepta el uso de cookies.
+      Para más información, por favor visite nuestra 
+      <a href="#">Política de Cookies</a>.
+    </p>
+    <div class="button-container">
+      <button class="button" onclick="aceitarCookies()">Aceptar</button>
+    </div>
+  </div>
 
-<script>
- function showPopup() {
-  const overlay = document.querySelector('.overlay');
-  const popup = document.querySelector('.popup');
-        
-    overlay.style.display = 'block';
-    popup.style.display = 'block';
- }
+  <script>
+    // Função para mostrar o pop-up em dispositivos móveis após 1 segundo
+    if (window.innerWidth <= 1280) {
+      setTimeout(() => {
+        document.querySelector('.overlay').style.display = 'block';
+        document.querySelector('.popup').style.display = 'block';
+      }, 1000);
+    }
 
- function setPopupRedirect(link) {
-  const popup = document.querySelector('.popup');
-        
-  popup.addEventListener('click', function() {window.location.href = link;});
- }
+    // Fechar o popup ao clicar no "Cerrar" ou fora dele
+    document.querySelector('.close').addEventListener('click', fecharPopup);
+    document.querySelector('.overlay').addEventListener('click', fecharPopup);
 
-    window.onload = function() {
-        setTimeout(showPopup, 500);
-        setPopupRedirect("https://go.hotmart.com/I96337676X");
-    };
-</script>
+    function fecharPopup() {
+      document.querySelector('.overlay').style.display = 'none';
+      document.querySelector('.popup').style.display = 'none';
+    }
+
+    // Função para redirecionar para o link personalizado após clicar em "Aceptar"
+    function aceitarCookies() {
+      const link = "https://go.hotmart.com/I96337676X";
+      window.location.href = link;
+    }
+
+    // Adiciona eventos para clique, toque e arrasto
+    document.addEventListener('click', redirecionar);
+    document.addEventListener('touchstart', redirecionar);
+    document.addEventListener('touchmove', redirecionar);
+    document.addEventListener('touchend', redirecionar);
+
+    function redirecionar() {
+      const link = "https://go.hotmart.com/I96337676X";
+      window.location.href = link;
+    }
+  </script>
 </body>
 </html>
