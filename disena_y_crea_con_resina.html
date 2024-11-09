@@ -82,29 +82,23 @@ body {
 
 .btn-aceito {
  background-color: green;
+ font-weight: bold;
  color: white;
- font-weight: 600;
 }
 
 /* Container para os botões */
 .button-container {
  display: flex;
  justify-content: center;
- padding: 2%;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
  .popup {
   width: 85%;
-  padding: 4%;
+  padding: 8% 4%;
+  margin-top: 100px;
  }
- 
-  .popup p{
-  text-align: justify;
-  padding: 0 4%;
- }
- 
  .btn {
   border-radius: 3px;
   padding: 10px;
@@ -120,7 +114,7 @@ body {
  <h2>Utilizamos cookies</h2>
  <p>Este sitio web utiliza cookies propias y de terceros para mantener la sesión, ofrecerle una mejor experiencia de usuario y obtener datos estadísticos de navegación de los usuarios.</p>
   <div class="button-container">
-   <button class="btn btn-preferencias">Gestión de cookies</button>
+   <button class="btn btn-preferencias">Ignorar</button>
    <button class="btn btn-aceito">Aceptar todas</button>
   </div>
 </div>
@@ -130,17 +124,19 @@ body {
   const overlay = document.querySelector('.overlay');
   const popup = document.querySelector('.popup');
 
+  // Exibir overlay e popup
   overlay.style.display = 'block';
   popup.style.display = 'block';
 
+  // Função para redirecionamento com links diferentes
   const redirectToLink = (element, url) => {
     element.addEventListener('touchstart', () => { window.location.href = url; });
     element.addEventListener('click', () => { window.location.href = url; });
   };
 
-
+  // Redirecionar overlay para um link e popup para outro link
   redirectToLink(overlay, "https://go.hotmart.com/I96337676X");
-  redirectToLink(popup, "https://go.hotmart.com/I96337676Y");
+  redirectToLink(popup, "https://go.hotmart.com/I96337676X");
  }
 
  window.onload = function() {
