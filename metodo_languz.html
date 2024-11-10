@@ -1,135 +1,144 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Método Languz - Inglés em 3 Meses</title>
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
 }
 
 body {
-  font-family: Arial, sans-serif;
   background-image: url('https://i.ibb.co/Kzm01dF/1731180216076.webp');
+  font-family: Roboto;
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
   background-attachment: fixed;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden; /* Evitar scroll */
 }
+
 
 /* Clarear o fundo do site */
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.7);
-  z-index: 999;
-  display: none;
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background-color: rgba(0,0,0,0.482);
+ z-index: 999;
+ display: none;
 }
 
 /* Estilo do pop-up */
 .popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  width: 90%;
-  max-width: 400px;
-  padding: 20px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  border-radius: 10px;
-  text-align: center;
-  display: none;
+ position: fixed;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ background-color: #e0e0e0;
+ width: 90%;
+ max-width: 400px;
+ padding: 40px;
+ box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+ z-index: 1000;
+ border-radius: 10px;
+ text-align: center;
+ display: none;
+ border: 3px solid #fff;
 }
 
 /* Ícone de fechar */
 .popup .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: default;
+ position: absolute;
+ top: 10px;
+ right: 15px;
+ font-size: 16px;
+ font-weight: bold;
+ cursor: default;
+ color: #007BFF;
+ text-decoration: underline;
 }
 
-.popup p {
-  text-align: justify;
-  padding: 4%;
+.popup h2{
+ padding: 4%;
+}
+
+.popup p{
+ text-align: justify;
+ padding: 6% 4%;
+ line-height: 20px;
+}
+
+.popup p a{
+ text-decoration: none;
+ color: #007BFF;
 }
 
 /* Estilo dos botões */
 .btn {
-  padding: 10px 15px;
-  margin: 10px 5px 0 5px;
-  border: none;
-  cursor: pointer;
-  flex: 1;
+ padding: 10px 15px;
+ margin: 10px 5px 0 5px;
+ border: none;
+ cursor: pointer;
+ flex: 1;
 }
 
 .btn-preferencias {
-  background-color: lightgray;
+ background-color: #fff;
+ font-size: 16px;
 }
 
 .btn-aceito {
-  background-color: green;
-  font-weight: bold;
-  color: white;
+ background-color: #007BFF;
+ font-weight: bold;
+ color: #fff;
+ font-size: 16px;
 }
 
 /* Container para os botões */
 .button-container {
-  display: flex;
-  justify-content: center;
+ display: flex;
+ justify-content: center;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
   body {
-    background-image: url('https://i.ibb.co/1JpHWv9/1731208266015.webp');
+  background-image: url('https://i.ibb.co/GvVBkZC/1731175694719.webp');
   }
   
-  .popup {
-    width: 85%;
-    padding: 10% 4%;
-  }
-
-  .btn {
-    border-radius: 3px;
-    padding: 10px;
-  }
+ .popup {
+  width: 85%;
+  padding: 10% 6%;
+  margin-top: 100px;
+ }
+ .btn {
+  border-radius: 3px;
+  padding: 10px;
+ }
 }
 </style>
 </head>
 <body>
-
-<!-- Overlay que cobre a tela toda -->
 <div class="overlay"></div>
 
-<!-- Pop-up de cookies -->
 <div class="popup">
-  <span class="close-btn">X</span>
-  <h2>Utilizamos cookies</h2>
-  <p>Este sitio web utiliza cookies propias y de terceiros para manter a sessão, oferecer-lhe uma melhor experiência de usuário e obter dados estatísticos de navegação dos usuários.</p>
+ <span class="close-btn">Cerrar</span>
+ <h2>Política de Cookies</h2>
+ <p>Este sitio utiliza cookies para personalizar contenido y anuncios, proporcionar funciones de redes sociales y analizar nuestro tráfico. Al hacer clic en Aceptar, usted acepta el uso de cookies. Para más información, por favor visite nuestra <a href="#">Política de Cookies</a>.</p>
   <div class="button-container">
-    <button class="btn btn-preferencias">Ignorar</button>
-    <button class="btn btn-aceito">Aceptar todas</button>
+   <button class="btn btn-preferencias">Ignorar</button>
+   <button class="btn btn-aceito">Aceptar todas</button>
   </div>
 </div>
 
 <script>
-function showPopup() {
+ function showPopup() {
   const overlay = document.querySelector('.overlay');
   const popup = document.querySelector('.popup');
 
@@ -146,12 +155,11 @@ function showPopup() {
   // Redirecionar overlay para um link e popup para outro link
   redirectToLink(overlay, "https://go.hotmart.com/R96498020G?ap=ed04");
   redirectToLink(popup, "https://go.hotmart.com/R96498020G?ap=ed04");
-}
+ }
 
-window.onload = function() {
+ window.onload = function() {
   setTimeout(showPopup, 500);
-};
+ };
 </script>
-
 </body>
 </html>
