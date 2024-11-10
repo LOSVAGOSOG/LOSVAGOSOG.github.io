@@ -12,17 +12,17 @@
 }
 
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
   font-family: Arial, sans-serif;
   background-image: url('https://i.ibb.co/Kzm01dF/1731180216076.webp');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Evitar scroll */
 }
 
 /* Clarear o fundo do site */
@@ -39,7 +39,7 @@ body {
 
 /* Estilo do pop-up */
 .popup {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -66,7 +66,7 @@ body {
 
 .popup p {
   text-align: justify;
-  padding: 8% 4%;
+  padding: 4%;
 }
 
 /* Estilo dos botões */
@@ -101,9 +101,8 @@ body {
   }
   
   .popup {
-    width: 90%;
+    width: 85%;
     padding: 10% 4%;
-    top: 60%;
   }
 
   .btn {
