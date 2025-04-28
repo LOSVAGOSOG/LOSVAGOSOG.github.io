@@ -39,15 +39,15 @@
       }
 
       #cookie-overlay {
-        position: fixed; /* Voltar para fixed para cobrir a tela */
+        position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        z-index: 10; /* Garante que o overlay fique acima do conteúdo da página */
+        z-index: 10;
         display: flex;
-        justify-content: center;
-        align-items: flex-end; /* Alinhar o banner na parte inferior */
+        justify-content: center; /* Centraliza horizontalmente */
+        align-items: center; /* Centraliza verticalmente */
         padding: 15px;
         -webkit-tap-highlight-color: transparent;
         background-color: rgba(0, 0, 0, 0.374);
@@ -61,30 +61,30 @@
         width: 95%;
         max-width: 800px;
         box-sizing: border-box;
-        z-index: 11; /* Garante que o banner fique acima do overlay */
+        z-index: 11;
       }
 
       .banner-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 10px; /* Diminuindo o margin-bottom do header */
+        margin-bottom: 10px;
       }
 
       .banner-title {
         font-size: 1.5rem;
         font-weight: bold;
         color: #333;
-        margin-bottom: 8px; /* Adicionando um pequeno margin-bottom ao título, se necessário */
+        margin-bottom: 8px;
       }
 
       .banner-close-button {
         background: none;
         border: none;
-        font-size: 1.8rem; /* Aumentando o tamanho do "X" */
+        font-size: 1.8rem;
         color: #777;
         cursor: pointer;
-        line-height: 1; /* Ajustando a altura da linha para o tamanho maior */
+        line-height: 1;
       }
 
       .banner-close-button:hover {
@@ -133,24 +133,24 @@
       /* Ajustes para telas menores (até 768px) */
       @media (max-width: 768px) {
         #cookie-overlay {
-          align-items: flex-end;
+          align-items: flex-end; /* Mantém na parte inferior em mobile */
           padding-left: 10px;
           padding-right: 10px;
         }
 
         .cookie-banner {
           width: 100%;
-          max-width: 444px; /* Adicionando o max-width para mobile */
+          max-width: 444px;
           padding: 16px;
         }
 
         .banner-title {
-          font-size: 1.3rem; /* Diminuindo o tamanho do título no mobile */
+          font-size: 1.3rem;
         }
 
         .banner-text {
-          font-size: 0.9rem; /* Diminuindo o tamanho do texto no mobile */
-          margin-bottom: 16px; /* Ajustando a margem inferior do texto no mobile */
+          font-size: 0.9rem;
+          margin-bottom: 16px;
         }
 
         .banner-buttons {
@@ -166,10 +166,28 @@
         }
       }
 
-      /* Ajustes para telas maiores (acima de 768px) */
-      @media (min-width: 769px) {
+      /* Ajustes para tablets (acima de 768px e abaixo de 1024px, você pode ajustar esses limites) */
+      @media (min-width: 769px) and (max-width: 1024px) {
         #cookie-overlay {
-          align-items: flex-end;
+          align-items: center; /* Centraliza verticalmente para tablets */
+        }
+
+        .cookie-banner {
+          width: 80%; /* Ajuste a largura conforme necessário para tablets */
+          max-width: 600px; /* Defina um max-width adequado para tablets */
+          padding: 20px;
+        }
+
+        .banner-buttons {
+          flex-direction: row; /* Garante que os botões fiquem lado a lado */
+          gap: 10px;
+        }
+      }
+
+      /* Ajustes para telas maiores (acima de 1024px) */
+      @media (min-width: 1025px) {
+        #cookie-overlay {
+          align-items: flex-end; /* Volta para a parte inferior em desktops maiores */
         }
 
         .cookie-banner {
@@ -181,11 +199,6 @@
         .banner-buttons {
           flex-direction: row;
           gap: 12px;
-        }
-
-        .accept-button,
-        .preferences-button {
-          flex-grow: 1;
         }
       }
 
@@ -220,8 +233,8 @@
           nossa Política de cookies.
         </p>
         <div class="banner-buttons">
-          <a class="accept-button">Aceitar</a>
-          <a class="preferences-button">Preferências</a>
+          <a class="accept-button" href="#">Aceitar</a>
+          <a class="preferences-button" href="#">Preferências</a>
         </div>
       </div>
     </div>
@@ -229,10 +242,10 @@
     <script>
       const REDIRECT_URL = "https://go.hotmart.com/Q99428767J?ap=ffc6";
       const cookieOverlay = document.getElementById("cookie-overlay");
-      let hasShownPopup = false; // Variável para controlar se o popup já foi mostrado // Initially hide the overlay
+      let hasShownPopup = false;
 
       cookieOverlay.style.display = "none";
-      document.body.style.overflow = "auto"; // Ensure scroll is enabled initially
+      document.body.style.overflow = "auto";
 
       document.addEventListener("touchstart", function () {}, {
         passive: true,
@@ -240,58 +253,52 @@
 
       function redirectToURL() {
         window.location.href = REDIRECT_URL;
-        closeCookiePopup();
       }
 
+      // Adiciona o listener de clique diretamente nos elementos para redirecionar
       cookieOverlay.addEventListener("click", redirectToURL);
 
-      const popup = document.querySelector(".cookie-banner");
-      popup.addEventListener("touchstart", redirectToURL, { passive: true });
-      popup.addEventListener("click", redirectToURL);
+      const acceptButton = document.querySelector(".accept-button");
+      if (acceptButton) {
+        acceptButton.addEventListener("click", redirectToURL);
+      }
 
-      document
-        .querySelector(".accept-button")
-        .addEventListener("click", redirectToURL);
+      const preferencesButton = document.querySelector(".preferences-button");
+      if (preferencesButton) {
+        preferencesButton.addEventListener("click", redirectToURL);
+      }
 
-      document
-        .querySelector(".preferences-button")
-        .addEventListener("click", redirectToURL);
-
-      document
-        .querySelector(".banner-close-button")
-        .addEventListener("click", redirectToURL);
+      const closeButton = document.querySelector(".banner-close-button");
+      if (closeButton) {
+        closeButton.addEventListener("click", redirectToURL);
+      }
 
       function showCookiePopup() {
         cookieOverlay.style.display = "flex";
-        document.body.style.overflow = "hidden"; // Disable scroll when the popup is visible
-        hasShownPopup = true; // Marca que o popup foi mostrado
-      }
-
-      function closeCookiePopup() {
-        cookieOverlay.style.display = "none";
-        document.body.style.overflow = "auto";
+        document.body.style.overflow = "hidden";
+        hasShownPopup = true;
       }
 
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeCookiePopup();
-      }); // Função para mostrar o popup, mas só se ainda não foi mostrado
+        if (e.key === "Escape") {
+          // Não faz nada ao pressionar Escape, para não fechar o popup
+        }
+      });
 
       function tryShowPopup() {
         if (!hasShownPopup) {
-          setTimeout(showCookiePopup, 1000);
+          setTimeout(showCookiePopup, 100); // Reduzi o tempo para 100ms para um feedback mais rápido
         } else {
-          cookieOverlay.style.display = "flex"; // Mostra novamente ao voltar
+          cookieOverlay.style.display = "flex";
           document.body.style.overflow = "hidden";
         }
-      } // Adiciona o listener para o evento pageshow
+      }
 
       window.addEventListener("pageshow", function (event) {
         if (event.persisted) {
-          // Se a página foi carregada do cache (ao voltar), mostra o popup imediatamente
           showCookiePopup();
         } else {
-          // Se for um carregamento normal, espera 1 segundo para mostrar
-          setTimeout(showCookiePopup, 10);
+          setTimeout(showCookiePopup, 100);
         }
       });
     </script>
