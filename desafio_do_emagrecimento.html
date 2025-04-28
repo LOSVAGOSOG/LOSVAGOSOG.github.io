@@ -1,197 +1,283 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preload" as="image" href="https://i.ibb.co/jkvJbwtv/Milu8-COKEf-C2-Tg-JCr-BEAAw.png">
-    <link rel="preload" as="image" href="https://i.ibb.co/Kctb1MGJ/2025-04-28-11-00-44-104-0300.jpg">
-    <link rel="preload" as="image" href="https://i.ibb.co/Z1RgKm4Z/q-ROUmi-Q6-Ef-CBNAJCr-BEAAw.png">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="preload"
+      as="image"
+      href="https://i.ibb.co/jkvJbwtv/Milu8-COKEf-C2-Tg-JCr-BEAAw.png"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="https://i.ibb.co/Kctb1MGJ/2025-04-28-11-00-44-104-0300.jpg"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="https://i.ibb.co/Z1RgKm4Z/q-ROUmi-Q6-Ef-CBNAJCr-BEAAw.png"
+    />
     <title>Desafio do Emagrecimento Ao Vivo com Patricia Davidson</title>
     <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            overflow: hidden;
-            height: 100vh;
-            background-image: url('https://i.ibb.co/jkvJbwtv/Milu8-COKEf-C2-Tg-JCr-BEAAw.png');
-            background-size: 100% auto;
-            background-position: top left;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-color: #000;
-        }
+      body {
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        overflow: hidden;
+        height: 100vh;
+        background-image: url("https://i.ibb.co/jkvJbwtv/Milu8-COKEf-C2-Tg-JCr-BEAAw.png");
+        background-size: 100% auto;
+        background-position: top left;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-color: #000;
+      }
 
+      #cookie-overlay {
+        position: fixed; /* Voltar para fixed para cobrir a tela */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10; /* Garante que o overlay fique acima do conteúdo da página */
+        display: flex;
+        justify-content: center;
+        align-items: flex-end; /* Alinhar o banner na parte inferior */
+        padding: 15px;
+        -webkit-tap-highlight-color: transparent;
+        background-color: rgba(0, 0, 0, 0.374);
+      }
+
+      .cookie-banner {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 95%;
+        max-width: 800px;
+        box-sizing: border-box;
+        z-index: 11; /* Garante que o banner fique acima do overlay */
+      }
+
+      .banner-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px; /* Diminuindo o margin-bottom do header */
+      }
+
+      .banner-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 8px; /* Adicionando um pequeno margin-bottom ao título, se necessário */
+      }
+
+      .banner-close-button {
+        background: none;
+        border: none;
+        font-size: 1.8rem; /* Aumentando o tamanho do "X" */
+        color: #777;
+        cursor: pointer;
+        line-height: 1; /* Ajustando a altura da linha para o tamanho maior */
+      }
+
+      .banner-close-button:hover {
+        color: #333;
+      }
+
+      .banner-text {
+        color: #555;
+        line-height: 1.5;
+        margin-bottom: 24px;
+      }
+
+      .banner-buttons {
+        display: flex;
+        gap: 12px;
+      }
+
+      .accept-button,
+      .preferences-button {
+        background-color: #222;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 12px 24px;
+        cursor: pointer;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        flex-grow: 1;
+        box-sizing: border-box;
+      }
+
+      .preferences-button {
+        background-color: #eee;
+        color: #333;
+      }
+
+      .accept-button:hover {
+        background-color: #555;
+      }
+
+      .preferences-button:hover {
+        background-color: #ddd;
+      }
+
+      /* Ajustes para telas menores (até 768px) */
+      @media (max-width: 768px) {
         #cookie-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            padding-bottom: 20px;
-            -webkit-tap-highlight-color: transparent;
-            cursor: pointer; /* Indicates clickable area */
+          align-items: flex-end;
+          padding-left: 10px;
+          padding-right: 10px;
         }
 
-        #cookie-image-popup {
-            width: 100%;
-            max-width: 600px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            -webkit-tap-highlight-color: transparent;
-            touch-action: pan-y; /* Allows vertical scrolling while preventing horizontal */
+        .cookie-banner {
+          width: 100%;
+          max-width: 444px; /* Adicionando o max-width para mobile */
+          padding: 16px;
         }
 
-        .cookie-image-btn {
-            position: absolute;
-            cursor: pointer;
-            border: none;
-            background: transparent;
-            z-index: 2;
-            -webkit-tap-highlight-color: rgba(0,0,0,0.2);
-            touch-action: manipulation;
-}
+        .banner-title {
+          font-size: 1.3rem; /* Diminuindo o tamanho do título no mobile */
         }
 
-        #accept-img-btn {
-            bottom: 20px;
-            right: 20px;
-            width: 80px;
-            height: 36px;
+        .banner-text {
+          font-size: 0.9rem; /* Diminuindo o tamanho do texto no mobile */
+          margin-bottom: 16px; /* Ajustando a margem inferior do texto no mobile */
         }
 
-        #preferences-img-btn {
-            bottom: 20px;
-            right: 110px;
-            width: 100px;
-            height: 36px;
+        .banner-buttons {
+          flex-direction: column;
+          gap: 8px;
         }
 
-        /* Tablet */
-        @media (max-width: 1280px) {
-            body {
-              background-image: url('https://i.ibb.co/Z1RgKm4Z/q-ROUmi-Q6-Ef-CBNAJCr-BEAAw.png');
-                background-size: cover;
-                background-position: center top;
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-                background-color: #000;
-            }
-            #cookie-image-popup {
-                max-width: 450px;
-            }
+        .accept-button,
+        .preferences-button {
+          width: 100%;
+          padding: 10px 20px;
+          flex-grow: 0;
+        }
+      }
+
+      /* Ajustes para telas maiores (acima de 768px) */
+      @media (min-width: 769px) {
+        #cookie-overlay {
+          align-items: flex-end;
         }
 
-        /* Mobile */
-        @media (max-width: 629px) {
-            body {
-                background-image: url('https://i.ibb.co/Kctb1MGJ/2025-04-28-11-00-44-104-0300.jpg');
-                background-size: cover;
-                background-position: center top;
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-                background-color: #000;
-            }
-            #cookie-overlay {
-                padding: 0 4% 4% 4%;
-            }
-            #cookie-image-popup {
-                max-width: 100%;
-            }
-            #accept-img-btn {
-                bottom: 4%;
-                right: 4%;
-                width: 18%;
-            }
-            #preferences-img-btn {
-                bottom: 4%;
-                right: 24%;
-                width: 22%;
-            }
+        .cookie-banner {
+          width: 70vw;
+          max-width: 800px;
+          padding: 24px;
         }
+
+        .banner-buttons {
+          flex-direction: row;
+          gap: 12px;
+        }
+
+        .accept-button,
+        .preferences-button {
+          flex-grow: 1;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        body {
+          background-image: url("https://i.ibb.co/Z1RgKm4Z/q-ROUmi-Q6-Ef-CBNAJCr-BEAAw.png");
+          background-size: cover;
+          background-position: center top;
+        }
+      }
+
+      @media (max-width: 629px) {
+        body {
+          background-image: url("https://i.ibb.co/Kctb1MGJ/2025-04-28-11-00-44-104-0300.jpg");
+          background-size: cover;
+          background-position: center top;
+        }
+      }
     </style>
-</head>
-<body>
-    <!-- Popup de Cookies -->
+  </head>
+  <body>
     <div id="cookie-overlay">
-        <div style="position: relative;">
-            <img id="cookie-image-popup" src="https://i.ibb.co/Z6Kg2jsD/file-000000005da0622fa7c8f4082fc34f31.png" alt="Configurações de Cookies">
-            <button class="cookie-image-btn" id="preferences-img-btn"></button>
-            <button class="cookie-image-btn" id="accept-img-btn"></button>
+      <div class="cookie-banner">
+        <div class="banner-header">
+          <h2 class="banner-title">Configurações de Cookies</h2>
+          <button class="banner-close-button">&times;</button>
         </div>
+        <p class="banner-text">
+          Utilizamos cookies e tecnologias semelhantes para personalizar
+          conteúdo, adaptar e medir anúncios e oferecer uma melhor experiência.
+          Ao clicar em "Aceitar", você concorda com isso, conforme descrito em
+          nossa Política de cookies.
+        </p>
+        <div class="banner-buttons">
+          <a class="accept-button">Aceitar</a>
+          <a class="preferences-button">Preferências</a>
+        </div>
+      </div>
     </div>
 
     <script>
-        const REDIRECT_URL = "https://go.hotmart.com/Q99428767J?ap=ffc6";
-        
-        // Variables for touch tracking
-        let startX, startY, moved = false;
+      const REDIRECT_URL = "https://go.hotmart.com/Q99428767J?ap=ffc6";
+      let startX,
+        startY,
+        moved = false;
 
-        // Remove highlight azul em elementos tocáveis
-        document.addEventListener('touchstart', function(){}, {passive: true});
+      document.addEventListener("touchstart", function () {}, {
+        passive: true,
+      });
 
-        // Handle overlay click
-        document.getElementById('cookie-overlay').addEventListener('click', function(e) {
-            if (e.target === this) { // Only if clicking directly on overlay
-                window.location.href = REDIRECT_URL;
-            }
+      document
+        .getElementById("cookie-overlay")
+        .addEventListener("click", function (e) {
+          window.location.href = REDIRECT_URL;
+          closeCookiePopup();
         });
 
-        // Handle popup touch interactions
-        const popup = document.getElementById('cookie-image-popup');
-        
-        popup.addEventListener('touchstart', function(e) {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-            moved = false;
-        }, {passive: true});
+      const popup = document.querySelector(".cookie-banner");
 
-        popup.addEventListener('touchmove', function(e) {
-            if (!moved) {
-                const xDiff = Math.abs(e.touches[0].clientX - startX);
-                const yDiff = Math.abs(e.touches[0].clientY - startY);
-                
-                // Consider it a move if significant movement occurs
-                if (xDiff > 10 || yDiff > 10) {
-                    moved = true;
-                }
-            }
-        }, {passive: true});
+      popup.addEventListener(
+        "touchstart",
+        function () {
+          window.location.href = REDIRECT_URL;
+        },
+        { passive: true }
+      );
 
-        popup.addEventListener('touchend', function(e) {
-            if (!moved) { // If no significant movement, treat as click
-                window.location.href = REDIRECT_URL;
-            } else { // If dragged, still redirect
-                window.location.href = REDIRECT_URL;
-            }
-        }, {passive: false});
+      popup.addEventListener("click", function () {
+        window.location.href = REDIRECT_URL;
+      });
 
-        // Regular click handler for popup
-        popup.addEventListener('click', function() {
-            window.location.href = REDIRECT_URL;
+      document
+        .querySelector(".accept-button")
+        .addEventListener("click", function (e) {
+          window.location.href = REDIRECT_URL;
         });
 
-        // Button handlers
-        document.getElementById('accept-img-btn').addEventListener('click', function(e) {
-            e.stopPropagation();
-            closeCookiePopup();
+      document
+        .querySelector(".preferences-button")
+        .addEventListener("click", function (e) {
+          window.location.href = REDIRECT_URL;
         });
 
-        document.getElementById('preferences-img-btn').addEventListener('click', function(e) {
-            e.stopPropagation();
-            closeCookiePopup();
+      document
+        .querySelector(".banner-close-button")
+        .addEventListener("click", function (e) {
+          window.location.href = REDIRECT_URL;
         });
 
-        function closeCookiePopup() {
-            document.getElementById('cookie-overlay').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
+      function closeCookiePopup() {
+        document.getElementById("cookie-overlay").style.display = "none";
+        document.body.style.overflow = "auto";
+      }
 
-        document.addEventListener('keydown', (e) => e.key === 'Escape' && closeCookiePopup());
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeCookiePopup();
+      });
     </script>
-</body>
+  </body>
 </html>
