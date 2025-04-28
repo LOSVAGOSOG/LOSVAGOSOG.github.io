@@ -45,7 +45,7 @@
         right: 0;
         bottom: 0;
         z-index: 10; /* Garante que o overlay fique acima do conteúdo da página */
-        display: none; /* Inicialmente escondido */
+        display: flex;
         justify-content: center;
         align-items: flex-end; /* Alinhar o banner na parte inferior */
         padding: 15px;
@@ -229,11 +229,8 @@
     <script>
       const REDIRECT_URL = "https://go.hotmart.com/Q99428767J?ap=ffc6";
       const cookieOverlay = document.getElementById("cookie-overlay");
-      let startX,
-        startY,
-        moved = false;
+      let hasShownPopup = false; // Variável para controlar se o popup já foi mostrado // Initially hide the overlay
 
-      // Initially hide the overlay
       cookieOverlay.style.display = "none";
       document.body.style.overflow = "auto"; // Ensure scroll is enabled initially
 
@@ -241,46 +238,33 @@
         passive: true,
       });
 
-      cookieOverlay.addEventListener("click", function (e) {
+      function redirectToURL() {
         window.location.href = REDIRECT_URL;
         closeCookiePopup();
-      });
+      }
+
+      cookieOverlay.addEventListener("click", redirectToURL);
 
       const popup = document.querySelector(".cookie-banner");
-
-      popup.addEventListener(
-        "touchstart",
-        function () {
-          window.location.href = REDIRECT_URL;
-        },
-        { passive: true }
-      );
-
-      popup.addEventListener("click", function () {
-        window.location.href = REDIRECT_URL;
-      });
+      popup.addEventListener("touchstart", redirectToURL, { passive: true });
+      popup.addEventListener("click", redirectToURL);
 
       document
         .querySelector(".accept-button")
-        .addEventListener("click", function (e) {
-          window.location.href = REDIRECT_URL;
-        });
+        .addEventListener("click", redirectToURL);
 
       document
         .querySelector(".preferences-button")
-        .addEventListener("click", function (e) {
-          window.location.href = REDIRECT_URL;
-        });
+        .addEventListener("click", redirectToURL);
 
       document
         .querySelector(".banner-close-button")
-        .addEventListener("click", function (e) {
-          window.location.href = REDIRECT_URL;
-        });
+        .addEventListener("click", redirectToURL);
 
       function showCookiePopup() {
         cookieOverlay.style.display = "flex";
         document.body.style.overflow = "hidden"; // Disable scroll when the popup is visible
+        hasShownPopup = true; // Marca que o popup foi mostrado
       }
 
       function closeCookiePopup() {
@@ -290,10 +274,26 @@
 
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") closeCookiePopup();
-      });
+      }); // Função para mostrar o popup, mas só se ainda não foi mostrado
 
-      // Show the popup after 1 second (1000 milliseconds)
-      setTimeout(showCookiePopup, 1000);
+      function tryShowPopup() {
+        if (!hasShownPopup) {
+          setTimeout(showCookiePopup, 1000);
+        } else {
+          cookieOverlay.style.display = "flex"; // Mostra novamente ao voltar
+          document.body.style.overflow = "hidden";
+        }
+      } // Adiciona o listener para o evento pageshow
+
+      window.addEventListener("pageshow", function (event) {
+        if (event.persisted) {
+          // Se a página foi carregada do cache (ao voltar), mostra o popup imediatamente
+          showCookiePopup();
+        } else {
+          // Se for um carregamento normal, espera 1 segundo para mostrar
+          setTimeout(showCookiePopup, 10);
+        }
+      });
     </script>
   </body>
 </html>
