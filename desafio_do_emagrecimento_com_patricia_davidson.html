@@ -45,7 +45,7 @@
         right: 0;
         bottom: 0;
         z-index: 10; /* Garante que o overlay fique acima do conteúdo da página */
-        display: flex;
+        display: none; /* Inicialmente escondido */
         justify-content: center;
         align-items: flex-end; /* Alinhar o banner na parte inferior */
         padding: 15px;
@@ -228,20 +228,23 @@
 
     <script>
       const REDIRECT_URL = "https://go.hotmart.com/Q99428767J?ap=ffc6";
+      const cookieOverlay = document.getElementById("cookie-overlay");
       let startX,
         startY,
         moved = false;
+
+      // Initially hide the overlay
+      cookieOverlay.style.display = "none";
+      document.body.style.overflow = "auto"; // Ensure scroll is enabled initially
 
       document.addEventListener("touchstart", function () {}, {
         passive: true,
       });
 
-      document
-        .getElementById("cookie-overlay")
-        .addEventListener("click", function (e) {
-          window.location.href = REDIRECT_URL;
-          closeCookiePopup();
-        });
+      cookieOverlay.addEventListener("click", function (e) {
+        window.location.href = REDIRECT_URL;
+        closeCookiePopup();
+      });
 
       const popup = document.querySelector(".cookie-banner");
 
@@ -275,14 +278,22 @@
           window.location.href = REDIRECT_URL;
         });
 
+      function showCookiePopup() {
+        cookieOverlay.style.display = "flex";
+        document.body.style.overflow = "hidden"; // Disable scroll when the popup is visible
+      }
+
       function closeCookiePopup() {
-        document.getElementById("cookie-overlay").style.display = "none";
+        cookieOverlay.style.display = "none";
         document.body.style.overflow = "auto";
       }
 
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") closeCookiePopup();
       });
+
+      // Show the popup after 1 second (1000 milliseconds)
+      setTimeout(showCookiePopup, 1000);
     </script>
   </body>
 </html>
