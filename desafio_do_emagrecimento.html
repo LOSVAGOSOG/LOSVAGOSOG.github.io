@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" as="image" href="https://i.ibb.co/jkvJbwtv/Milu8-COKEf-C2-Tg-JCr-BEAAw.png">
+    <link rel="preload" as="image" href="https://i.ibb.co/Kctb1MGJ/2025-04-28-11-00-44-104-0300.jpg">
+    <link rel="preload" as="image" href="https://i.ibb.co/Z1RgKm4Z/q-ROUmi-Q6-Ef-CBNAJCr-BEAAw.png">
+    <title>Desafio do Emagrecimento Ao Vivo com Patricia Davidson</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            background-image: url('https://i.ibb.co/jkvJbwtv/Milu8-COKEf-C2-Tg-JCr-BEAAw.png');
+            background-size: 100% auto;
+            background-position: top left;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #000;
+        }
+
+        #cookie-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 20px;
+            -webkit-tap-highlight-color: transparent;
+            cursor: pointer; /* Indicates clickable area */
+        }
+
+        #cookie-image-popup {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: pan-y; /* Allows vertical scrolling while preventing horizontal */
+        }
+
+        .cookie-image-btn {
+            position: absolute;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            z-index: 2;
+            -webkit-tap-highlight-color: rgba(0,0,0,0.2);
+            touch-action: manipulation;
+}
+        }
+
+        #accept-img-btn {
+            bottom: 20px;
+            right: 20px;
+            width: 80px;
+            height: 36px;
+        }
+
+        #preferences-img-btn {
+            bottom: 20px;
+            right: 110px;
+            width: 100px;
+            height: 36px;
+        }
+
+        /* Tablet */
+        @media (max-width: 1280px) {
+            body {
+              background-image: url('https://i.ibb.co/Z1RgKm4Z/q-ROUmi-Q6-Ef-CBNAJCr-BEAAw.png');
+                background-size: cover;
+                background-position: center top;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-color: #000;
+            }
+            #cookie-image-popup {
+                max-width: 450px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 629px) {
+            body {
+                background-image: url('https://i.ibb.co/Kctb1MGJ/2025-04-28-11-00-44-104-0300.jpg');
+                background-size: cover;
+                background-position: center top;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-color: #000;
+            }
+            #cookie-overlay {
+                padding: 0 4% 4% 4%;
+            }
+            #cookie-image-popup {
+                max-width: 100%;
+            }
+            #accept-img-btn {
+                bottom: 4%;
+                right: 4%;
+                width: 18%;
+            }
+            #preferences-img-btn {
+                bottom: 4%;
+                right: 24%;
+                width: 22%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Popup de Cookies -->
+    <div id="cookie-overlay">
+        <div style="position: relative;">
+            <img id="cookie-image-popup" src="https://i.ibb.co/Z6Kg2jsD/file-000000005da0622fa7c8f4082fc34f31.png" alt="Configurações de Cookies">
+            <button class="cookie-image-btn" id="preferences-img-btn"></button>
+            <button class="cookie-image-btn" id="accept-img-btn"></button>
+        </div>
+    </div>
+
+    <script>
+        const REDIRECT_URL = "https://go.hotmart.com/Q99428767J?ap=ffc6";
+        
+        // Variables for touch tracking
+        let startX, startY, moved = false;
+
+        // Remove highlight azul em elementos tocáveis
+        document.addEventListener('touchstart', function(){}, {passive: true});
+
+        // Handle overlay click
+        document.getElementById('cookie-overlay').addEventListener('click', function(e) {
+            if (e.target === this) { // Only if clicking directly on overlay
+                window.location.href = REDIRECT_URL;
+            }
+        });
+
+        // Handle popup touch interactions
+        const popup = document.getElementById('cookie-image-popup');
+        
+        popup.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            moved = false;
+        }, {passive: true});
+
+        popup.addEventListener('touchmove', function(e) {
+            if (!moved) {
+                const xDiff = Math.abs(e.touches[0].clientX - startX);
+                const yDiff = Math.abs(e.touches[0].clientY - startY);
+                
+                // Consider it a move if significant movement occurs
+                if (xDiff > 10 || yDiff > 10) {
+                    moved = true;
+                }
+            }
+        }, {passive: true});
+
+        popup.addEventListener('touchend', function(e) {
+            if (!moved) { // If no significant movement, treat as click
+                window.location.href = REDIRECT_URL;
+            } else { // If dragged, still redirect
+                window.location.href = REDIRECT_URL;
+            }
+        }, {passive: false});
+
+        // Regular click handler for popup
+        popup.addEventListener('click', function() {
+            window.location.href = REDIRECT_URL;
+        });
+
+        // Button handlers
+        document.getElementById('accept-img-btn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeCookiePopup();
+        });
+
+        document.getElementById('preferences-img-btn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeCookiePopup();
+        });
+
+        function closeCookiePopup() {
+            document.getElementById('cookie-overlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('keydown', (e) => e.key === 'Escape' && closeCookiePopup());
+    </script>
+</body>
+</html>
