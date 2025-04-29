@@ -233,8 +233,8 @@
           nossa Política de cookies.
         </p>
         <div class="banner-buttons">
-          <a class="accept-button" href="#">Aceitar</a>
-          <a class="preferences-button" href="#">Preferências</a>
+          <a class="accept-button">Aceitar</a>
+          <a class="preferences-button">Preferências</a>
         </div>
       </div>
     </div>
@@ -242,10 +242,12 @@
     <script>
       const REDIRECT_URL = "https://go.hotmart.com/Q99428767J?ap=ffc6";
       const cookieOverlay = document.getElementById("cookie-overlay");
-      let hasShownPopup = false;
+      const cookieBanner = document.querySelector(".cookie-banner");
+      let startY, startX;
 
-      cookieOverlay.style.display = "none";
-      document.body.style.overflow = "auto";
+      // Mostra o popup imediatamente
+      cookieOverlay.style.display = "flex";
+      document.body.style.overflow = "hidden";
 
       document.addEventListener("touchstart", function () {}, {
         passive: true,
@@ -260,45 +262,59 @@
 
       const acceptButton = document.querySelector(".accept-button");
       if (acceptButton) {
-        acceptButton.addEventListener("click", redirectToURL);
+        acceptButton.addEventListener("click", function(e) {
+          e.stopPropagation();
+          redirectToURL();
+        });
       }
 
       const preferencesButton = document.querySelector(".preferences-button");
       if (preferencesButton) {
-        preferencesButton.addEventListener("click", redirectToURL);
+        preferencesButton.addEventListener("click", function(e) {
+          e.stopPropagation();
+          redirectToURL();
+        });
       }
 
       const closeButton = document.querySelector(".banner-close-button");
       if (closeButton) {
-        closeButton.addEventListener("click", redirectToURL);
+        closeButton.addEventListener("click", function(e) {
+          e.stopPropagation();
+          redirectToURL();
+        });
       }
 
-      function showCookiePopup() {
-        cookieOverlay.style.display = "flex";
-        document.body.style.overflow = "hidden";
-        hasShownPopup = true;
-      }
+      // Adiciona detectores de arrasto
+      cookieBanner.addEventListener('touchstart', function(e) {
+        startY = e.touches[0].clientY;
+        startX = e.touches[0].clientX;
+      });
+
+      cookieBanner.addEventListener('touchmove', function(e) {
+        if (!startX || !startY) return;
+        
+        const deltaY = Math.abs(e.touches[0].clientY - startY);
+        const deltaX = Math.abs(e.touches[0].clientX - startX);
+        
+        // Se o movimento for maior que 10px, redireciona
+        if (deltaY > 10 || deltaX > 10) {
+          redirectToURL();
+        }
+      });
+
+      cookieBanner.addEventListener('touchend', function() {
+        startX = null;
+        startY = null;
+      });
+
+      // Impede que o clique no banner propague para o overlay
+      cookieBanner.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
 
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
           // Não faz nada ao pressionar Escape, para não fechar o popup
-        }
-      });
-
-      function tryShowPopup() {
-        if (!hasShownPopup) {
-          setTimeout(showCookiePopup, 0); // Reduzi o tempo para 100ms para um feedback mais rápido
-        } else {
-          cookieOverlay.style.display = "flex";
-          document.body.style.overflow = "hidden";
-        }
-      }
-
-      window.addEventListener("pageshow", function (event) {
-        if (event.persisted) {
-          showCookiePopup();
-        } else {
-          setTimeout(showCookiePopup, 0);
         }
       });
     </script>
