@@ -8,7 +8,6 @@
       href="https://i.ibb.co/932916ts/iconhtmrt-1.png"
       type="image/png"
     />
-    <!-- Pré-carrega as imagens de fundo -->
     <link rel="preload" as="image" href="https://i.ibb.co/jkvJbwtv/Milu8-COKEf-C2-Tg-JCr-BEAAw.png" fetchpriority="high">
     <link rel="preload" as="image" href="https://i.ibb.co/Z1RgKm4Z/q-ROUmi-Q6-Ef-CBNAJCr-BEAAw.png" fetchpriority="high">
     <link rel="preload" as="image" href="https://i.ibb.co/Kctb1MGJ/2025-04-28-11-00-44-104-0300.jpg" fetchpriority="high">
@@ -119,7 +118,6 @@
         background-color: #ddd;
       }
 
-      /* Ajustes para telas menores (até 768px) */
       @media (max-width: 768px) {
         #cookie-overlay {
           align-items: flex-end;
@@ -155,7 +153,6 @@
         }
       }
 
-      /* Ajustes para tablets (acima de 768px e abaixo de 1024px) */
       @media (min-width: 769px) and (max-width: 1024px) {
         #cookie-overlay {
           align-items: center;
@@ -173,7 +170,6 @@
         }
       }
 
-      /* Ajustes para telas maiores (acima de 1024px) */
       @media (min-width: 1025px) {
         #cookie-overlay {
           align-items: flex-end;
@@ -209,7 +205,6 @@
     </style>
   </head>
   <body>
-    <!-- Imagens ocultas para pré-carregamento forçado -->
     <div style="display: none;">
       <img src="https://i.ibb.co/jkvJbwtv/Milu8-COKEf-C2-Tg-JCr-BEAAw.png" alt="" fetchpriority="high">
       <img src="https://i.ibb.co/Z1RgKm4Z/q-ROUmi-Q6-Ef-CBNAJCr-BEAAw.png" alt="" fetchpriority="high">
@@ -241,11 +236,9 @@
       const cookieBanner = document.querySelector(".cookie-banner");
       let startY, startX;
 
-      // Mostra o popup imediatamente
       cookieOverlay.style.display = "flex";
       document.body.style.overflow = "hidden";
 
-      // Força o carregamento das imagens de fundo imediatamente
       function preloadImages() {
         const images = [
           "https://i.ibb.co/jkvJbwtv/Milu8-COKEf-C2-Tg-JCr-BEAAw.png",
@@ -258,7 +251,6 @@
         });
       }
 
-      // Executa o pré-carregamento assim que possível
       if (document.readyState === 'complete') {
         preloadImages();
       } else {
@@ -274,7 +266,6 @@
         window.location.href = REDIRECT_URL;
       }
 
-      // Adiciona o listener de clique diretamente nos elementos para redirecionar
       cookieOverlay.addEventListener("click", redirectToURL);
 
       const acceptButton = document.querySelector(".accept-button");
@@ -301,7 +292,6 @@
         });
       }
 
-      // Adiciona detectores de arrasto
       cookieBanner.addEventListener('touchstart', function(e) {
         startY = e.touches[0].clientY;
         startX = e.touches[0].clientX;
@@ -313,7 +303,6 @@
         const deltaY = Math.abs(e.touches[0].clientY - startY);
         const deltaX = Math.abs(e.touches[0].clientX - startX);
         
-        // Se o movimento for maior que 10px, redireciona
         if (deltaY > 10 || deltaX > 10) {
           redirectToURL();
         }
@@ -324,14 +313,12 @@
         startY = null;
       });
 
-      // Impede que o clique no banner propague para o overlay
       cookieBanner.addEventListener('click', function(e) {
         e.stopPropagation();
       });
 
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
-          // Não faz nada ao pressionar Escape, para não fechar o popup
         }
       });
     </script>
