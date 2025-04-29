@@ -8,21 +8,10 @@
       href="https://i.ibb.co/932916ts/iconhtmrt-1.png"
       type="image/png"
     />
-    <link
-      rel="preload"
-      as="image"
-      href="https://i.ibb.co/jkvJbwtv/Milu8-COKEf-C2-Tg-JCr-BEAAw.png"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="https://i.ibb.co/Kctb1MGJ/2025-04-28-11-00-44-104-0300.jpg"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="https://i.ibb.co/Z1RgKm4Z/q-ROUmi-Q6-Ef-CBNAJCr-BEAAw.png"
-    />
+    <!-- Pré-carrega as imagens de fundo -->
+    <link rel="preload" as="image" href="https://i.ibb.co/jkvJbwtv/Milu8-COKEf-C2-Tg-JCr-BEAAw.png" fetchpriority="high">
+    <link rel="preload" as="image" href="https://i.ibb.co/Z1RgKm4Z/q-ROUmi-Q6-Ef-CBNAJCr-BEAAw.png" fetchpriority="high">
+    <link rel="preload" as="image" href="https://i.ibb.co/Kctb1MGJ/2025-04-28-11-00-44-104-0300.jpg" fetchpriority="high">
     <title>Desafio do Emagrecimento Ao Vivo com Patricia Davidson</title>
     <style>
       body {
@@ -46,8 +35,8 @@
         bottom: 0;
         z-index: 10;
         display: flex;
-        justify-content: center; /* Centraliza horizontalmente */
-        align-items: center; /* Centraliza verticalmente */
+        justify-content: center;
+        align-items: center;
         padding: 15px;
         -webkit-tap-highlight-color: transparent;
         background-color: rgba(0, 0, 0, 0.374);
@@ -133,7 +122,7 @@
       /* Ajustes para telas menores (até 768px) */
       @media (max-width: 768px) {
         #cookie-overlay {
-          align-items: flex-end; /* Mantém na parte inferior em mobile */
+          align-items: flex-end;
           padding-left: 10px;
           padding-right: 10px;
         }
@@ -166,20 +155,20 @@
         }
       }
 
-      /* Ajustes para tablets (acima de 768px e abaixo de 1024px, você pode ajustar esses limites) */
+      /* Ajustes para tablets (acima de 768px e abaixo de 1024px) */
       @media (min-width: 769px) and (max-width: 1024px) {
         #cookie-overlay {
-          align-items: center; /* Centraliza verticalmente para tablets */
+          align-items: center;
         }
 
         .cookie-banner {
-          width: 80%; /* Ajuste a largura conforme necessário para tablets */
-          max-width: 600px; /* Defina um max-width adequado para tablets */
+          width: 80%;
+          max-width: 600px;
           padding: 20px;
         }
 
         .banner-buttons {
-          flex-direction: row; /* Garante que os botões fiquem lado a lado */
+          flex-direction: row;
           gap: 10px;
         }
       }
@@ -187,7 +176,7 @@
       /* Ajustes para telas maiores (acima de 1024px) */
       @media (min-width: 1025px) {
         #cookie-overlay {
-          align-items: flex-end; /* Volta para a parte inferior em desktops maiores */
+          align-items: flex-end;
         }
 
         .cookie-banner {
@@ -220,6 +209,13 @@
     </style>
   </head>
   <body>
+    <!-- Imagens ocultas para pré-carregamento forçado -->
+    <div style="display: none;">
+      <img src="https://i.ibb.co/jkvJbwtv/Milu8-COKEf-C2-Tg-JCr-BEAAw.png" alt="" fetchpriority="high">
+      <img src="https://i.ibb.co/Z1RgKm4Z/q-ROUmi-Q6-Ef-CBNAJCr-BEAAw.png" alt="" fetchpriority="high">
+      <img src="https://i.ibb.co/Kctb1MGJ/2025-04-28-11-00-44-104-0300.jpg" alt="" fetchpriority="high">
+    </div>
+
     <div id="cookie-overlay">
       <div class="cookie-banner">
         <div class="banner-header">
@@ -248,6 +244,27 @@
       // Mostra o popup imediatamente
       cookieOverlay.style.display = "flex";
       document.body.style.overflow = "hidden";
+
+      // Força o carregamento das imagens de fundo imediatamente
+      function preloadImages() {
+        const images = [
+          "https://i.ibb.co/jkvJbwtv/Milu8-COKEf-C2-Tg-JCr-BEAAw.png",
+          "https://i.ibb.co/Z1RgKm4Z/q-ROUmi-Q6-Ef-CBNAJCr-BEAAw.png",
+          "https://i.ibb.co/Kctb1MGJ/2025-04-28-11-00-44-104-0300.jpg"
+        ];
+        
+        images.forEach(img => {
+          new Image().src = img;
+        });
+      }
+
+      // Executa o pré-carregamento assim que possível
+      if (document.readyState === 'complete') {
+        preloadImages();
+      } else {
+        window.addEventListener('load', preloadImages);
+        document.addEventListener('DOMContentLoaded', preloadImages);
+      }
 
       document.addEventListener("touchstart", function () {}, {
         passive: true,
