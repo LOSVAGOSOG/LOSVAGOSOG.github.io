@@ -83,14 +83,14 @@
             align-items: center;
             padding: 15px;
             -webkit-tap-highlight-color: transparent;
-            background-color: rgba(0, 0, 0, 0.129);
+            background-color: rgba(0, 0, 0, 0.2);
         }
 
         .cookie-banner {
             background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 4px 4px 15px 10px rgba(0, 0, 0, 0.463);
-            padding: 20px;
+            border-radius: 18px;
+            box-shadow: 2px 2px 8px 4px rgba(0,0,0,0.651);
+            padding: 22px;
             width: 95%;
             max-width: 800px;
             box-sizing: border-box;
@@ -105,16 +105,15 @@
         }
 
         .banner-title {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.7rem;
             color: #333;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .banner-close-button {
             background: none;
             border: none;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             color: #777;
             cursor: pointer;
             line-height: 1;
@@ -135,10 +134,11 @@
         }
 
         .accept-button {
-            background-color: #222;
+            background-color: rgb(6,63,255);
             color: #fff;
             border: none;
             border-radius: 6px;
+            max-width: 380px;
             padding: 12px 24px;
             cursor: pointer;
             font-weight: bold;
@@ -153,7 +153,7 @@
         }
 
         .accept-button:hover {
-            background-color: #555;
+            background-color: rgb(136,163,255);
         }
 
         @media (max-width: 768px) {
@@ -166,7 +166,8 @@
             .cookie-banner {
                 width: 100%;
                 max-width: 444px;
-                padding: 16px;
+                padding: 18px;
+                margin-bottom: 20px;
             }
 
             .banner-title {
@@ -185,6 +186,7 @@
 
             .accept-button {
                 width: 100%;
+                max-width: 100%;
                 padding: 12px 20px;
                 flex-grow: 0;
             }
@@ -273,7 +275,6 @@
             });
         }
 
-
         const closeButton = document.querySelector(".banner-close-button");
         if (closeButton) {
             closeButton.addEventListener("click", function (e) {
@@ -281,6 +282,10 @@
                 redirectToURL();
             });
         }
+
+        cookieBanner.addEventListener("click", function (e) {
+            redirectToURL();
+        });
 
         cookieBanner.addEventListener("touchstart", function (e) {
             startY = e.touches[0].clientY;
@@ -303,12 +308,9 @@
             startY = null;
         });
 
-        cookieBanner.addEventListener("click", function (e) {
-            e.stopPropagation();
-        });
-
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape") {
+                redirectToURL();
             }
         });
     </script>
