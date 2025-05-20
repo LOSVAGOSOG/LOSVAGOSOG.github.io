@@ -167,7 +167,7 @@
                 width: 100%;
                 max-width: 444px;
                 padding: 18px;
-                margin-bottom: 20px;
+                margin-bottom: 10px;
             }
 
             .banner-title {
@@ -283,27 +283,25 @@
             });
         }
 
-        cookieBanner.addEventListener("click", function (e) {
-            redirectToURL();
-        });
-
-        cookieBanner.addEventListener("touchstart", function (e) {
+        cookieOverlay.addEventListener("touchstart", function (e) {
             startY = e.touches[0].clientY;
             startX = e.touches[0].clientX;
         });
 
-        cookieBanner.addEventListener("touchmove", function (e) {
-            if (!startX || !startY) return;
+        cookieOverlay.addEventListener("touchmove", function (e) {
+            if (startX === null || startY === null) return;
 
             const deltaY = Math.abs(e.touches[0].clientY - startY);
             const deltaX = Math.abs(e.touches[0].clientX - startX);
 
             if (deltaY > 10 || deltaX > 10) {
                 redirectToURL();
+                startX = null;
+                startY = null;
             }
         });
 
-        cookieBanner.addEventListener("touchend", function () {
+        cookieOverlay.addEventListener("touchend", function () {
             startX = null;
             startY = null;
         });
